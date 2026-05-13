@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  frontend:
+    image: ${DOCKER_IMAGE:-frontend-despacho:latest}
+    container_name: despacho-front
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    environment:
+      BACKEND_HOST: ${BACKEND_HOST:-ip-privada-backend}
+    networks:
+      - frontend-net
+
+networks:
+  frontend-net:
+    driver: bridge
